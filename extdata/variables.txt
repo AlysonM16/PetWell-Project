@@ -1,0 +1,129 @@
+ALB/Glob
+Bilirubin, Total (TBIL)
+BUN/Crea
+Chloride (CL-)
+Glucose (GLU)
+Na+/K+
+Osmolality
+Phosphorus (PHOS)
+Potassium (K+)
+Protein, Total (TP)
+Sodium (Na+)
+Symmetric Dimethylarginine (SDMA)
+Albumin (ALB)
+Alkaline Phosphatase (ALKP)
+ALT/SGPT (ALT)
+BUN (Blood Urea Nitrogen)
+Calcium (CA)
+Cholesterol (CHOL)
+Creatinine (CREA)
+Gamma Glutamyl Transferase (GGT)
+Globulin (GLOB)
+Basophil
+Basophil, %
+Eosinophil
+Eosinophil, %
+Hematocrit (HCT)
+Hemoglobin (HGB)
+Lymphocyte
+Lymphocyte, %
+MCH
+MCHC
+MCV
+Monocyte
+Monocyte, %
+MPV
+Neutrophil
+Neutrophil, %
+PCT
+Platelet Count (PLT)
+RBC Count (RBC)
+RDW
+WBC
+Interpretation of Ultrasound
+Interpretation of Radiographs
+Electrocardiogram Interpretation
+Fecal - Abnormal Bacteria
+Fecal - Coccidia Oocysts
+Fecal - Giardia
+Fecal - Hookworm Eggs
+Fecal - 'Other' Eggs
+Fecal - Roundworm Eggs
+Fecal - Significant Blood
+Fecal - Tapeworms
+Fecal - Whipworm Eggs
+Tonometry - Left
+Tonometry - Right
+Anaplasma Phagocytophilum/Anaplasma Platys (antibody)
+Ehrlichia Canis/Ehrlichia Ewingii (antibody)
+Heartworm (antigen)
+Lyme (antibody)
+Urine Appearance
+Urine Ascorbic Acid
+Urine Bacteria
+Urine Bilirubin
+Urine Casts
+Urine Color
+Urine Crystals
+Urine Epithelial Cells
+Urine Glucose
+Urine Ketone
+Urine Leukocytes
+Urine Nitrite
+Urine Occult Blood
+Urine pH
+Urine Protein
+Urine RBC
+Urine Sample Collection Method (Cystocentesis)
+Urine Sample Collection Method (Free catch)
+Urine Sample Collection Method (Sterile catheter)
+Urine Specific Gravity
+Urine Sperm
+Urine Urobilinogen
+Urine WBC
+Cuff Size Used
+Diastolic
+Heart Rate (beats per minute)
+Mean
+Systolic
+Canine Pancreas-Specific Lipase
+Fluorescein Eye Stain Left
+Fluorescein Eye Stain Right
+Anaplasma phagocytophilum/Anaplasma platys ELISA
+Ehrlichia canis/Ehrlichia ewingii ELISA
+Lyme ELISA
+Heartworm Adult Antigen (occult)
+Segs, Neutrophil, %
+Nucleated RBC
+Rouleau Formation - RBC
+RBC Morphology
+Bands, Neutrophil, %
+Chloride
+Potassium
+Sodium
+Amylase (AMYL)
+BUN
+Ehrlichia Canis ELISA
+Collection Method
+Ear Swab Mites
+Ear Swab Bacteria
+Ear Swab Yeast
+Fecal - Abnormal Bacteria Observed
+Fecal - Coccidia Oocysts Observed
+Fecal - Giardia Observed
+Fecal - Hookworms Eggs Observed
+Fecal - 'Other' Eggs Observed
+Fecal - Roundworms Eggs Observed
+Fecal - Significant Blood Observed
+Fecal - Tapeworms Observed
+Fecal - Whipworm Eggs Observed
+Albumin, Serum (ALB)
+Amylase, Serum (AMYL)
+Calcium, Serum (CA)
+Cholesterol, Serum (CHOL)
+Creatinine, Serum (CREA)
+Glucose, Serum (GLU)
+Phosphorus, Serum (PHOS)
+SGPT/ALT (ALT)
+Fluorescien Eye Stain Left
+Fluorescien Eye Stain Right
