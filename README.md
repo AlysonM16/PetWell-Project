@@ -65,4 +65,4 @@ docker-compose up --build
 - Run project on venv, host like this uvicorn backend.main:app --reload --port 8000 --host 10.203.94.239(Your IP)
 - Install node.js
 - Have these libraries installed - npx expo install expo-document-picker - npm install react-native-plotly react-native-paper
-- Download expogo
+- Download expogo on mobile device

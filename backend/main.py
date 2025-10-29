@@ -29,7 +29,7 @@ from fastapi.responses import FileResponse
 
 @app.get("/")
 async def read_root():
-    return {"message": "React Native is connected to backend!!!!"}
+    return {"message": "Hello!!!!"}
     #return FileResponse("frontend/index.html")
 
 @app.post("/process-pdf")
