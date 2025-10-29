@@ -72,7 +72,7 @@ def extract_medical_data_with_gemini(api_key: str, markdown_text: str):
 # 3. Main driver
 # ----------------------------
 def main():
-    api_key = "AIzaSyAf27if0_zhCI-Z21r4xjFGIJdAE9P3nx0"
+    api_key = ""
     pdf_path = "lab2_Redacted.pdf"
     output_md = "lab2_Redacted_output.md"
 
@@ -92,3 +92,4 @@ def main():
 if __name__ == "__main__":
     start = time.time()
     main()
+
