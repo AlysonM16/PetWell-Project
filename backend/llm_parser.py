@@ -11,7 +11,7 @@ import pytesseract
 from dotenv import load_dotenv
 
 # Load environment variables from .env file
-load_dotenv()
+load_dotenv(dotenv_path="backend/.env")
 
 # Configure Google AI API
 GOOGLE_API_KEY = os.getenv('GOOGLE_API_KEY')
