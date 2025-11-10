@@ -29,9 +29,9 @@ def pdf_to_markdown(pdf_path: str) -> str:
     doc = pymupdf.open(pdf_path)
     ocr_text = []
     for i, page in enumerate(doc):
-        pix = page.get_pixmap()
-        img = Image.open(io.BytesIO(pix.tobytes("png")))
-        text = pytesseract.image_to_string(img)
+        pix = page.get_pixmap(dpi=300)
+        img = Image.open(io.BytesIO(pix.tobytes("png"))).convert("L")
+        text = pytesseract.image_to_string(img, config="--psm 3")
         ocr_text.append(f"# Page {i + 1}\n\n{text.strip()}\n\n---\n\n")
     return "".join(ocr_text)
 
