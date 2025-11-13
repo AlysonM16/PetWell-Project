@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "react-native-paper": "^5.14.5",
+    "react-native-plotly": "^6.0.0"
+  }
+}
