@@ -11,7 +11,8 @@ load_dotenv(dotenv_path="backend/.env")
 # Configure Google AI API
 GOOGLE_API_KEY = os.getenv('GOOGLE_API_KEY')
 if not GOOGLE_API_KEY:
-    raise ValueError("GOOGLE_API_KEY environment variable not set")
+    #raise ValueError("GOOGLE_API_KEY environment variable not set")
+    GOOGLE_API_KEY = "dummy_key_for_local_testing"
 genai.configure(api_key=GOOGLE_API_KEY)
 
 def extract_data_from_pdf(file_path: str) -> dict:

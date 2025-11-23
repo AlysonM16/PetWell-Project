@@ -4,3 +4,8 @@ python-dotenv
 python-multipart
 google-generativeai
 json_repair
+sqlalchemy
+passlib[bcrypt]
+python-jose[cryptography]
+pydantic[email]
+pydantic-settings
