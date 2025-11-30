@@ -4,7 +4,8 @@ python-dotenv
 python-multipart
 google-generativeai
 json_repair
-Pillow
-pytesseract
-pymupdf
-pymupdf4llm
+sqlalchemy
+passlib[bcrypt]
+python-jose[cryptography]
+pydantic[email]
+pydantic-settings
