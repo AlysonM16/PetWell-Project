@@ -1,134 +1,117 @@
-import React, { useState } from "react";
-import { View, Text, Button, StyleSheet, ActivityIndicator, ScrollView } from "react-native";
-import * as DocumentPicker from "expo-document-picker";
-import Plotly from "react-native-plotly";
+// App.js
+import React from "react";
+import { Text, Alert } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { Ionicons } from "@expo/vector-icons";
 
-export default function App() {
-  const [status, setStatus] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [chartData, setChartData] = useState(null);
-  const [elapsed, setElapsed] = useState(0);
-  const [timer, setTimer] = useState(null);
+// Auth + API
+import { AuthProvider, useAuth } from "./src/AuthContext";
 
-  const startTimer = () => {
-    setElapsed(0);
-    const start = Date.now();
-    const interval = setInterval(() => {
-      setElapsed(((Date.now() - start) / 1000).toFixed(2));
-    }, 100);
-    setTimer(interval);
-  };
+// Screens
+import LoginScreen from "./src/screens/LoginScreen";
+import RegisterScreen from "./src/screens/RegisterScreen";
+import HomeScreen from "./src/screens/dashboard";      // your dashboard UI
+import AddPetScreen from "./src/screens/addPet";
+import PetProfile from "./src/screens/PetProfile";
+import LabRecords from "./src/screens/labrecords";
+import FileUploadScreen from "./src/screens/fileUpload";
+import graph from "./src/screens/graph";
 
-  const stopTimer = () => {
-    if (timer) clearInterval(timer);
-  };
+const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
 
-  const uploadPDF = async () => {
-    const result = await DocumentPicker.getDocumentAsync({ type: "application/pdf" });
-    if (result.canceled) return;
+/* ---------- Stacks ---------- */
 
-    const file = result.assets[0];
-    const formData = new FormData();
-    formData.append("file", {
-      uri: file.uri,
-      name: file.name,
-      type: "application/pdf",
-    });
-
-    setLoading(true);
-    setStatus("Processing PDF...");
-    startTimer();
-
-    try {
-      const response = await fetch("http://10.0.0.10:8000/process-pdf", {
-        method: "POST",
-        body: formData,
-        headers: { "Content-Type": "multipart/form-data" },
-      });
-
-      if (!response.ok) {
-        const err = await response.text();
-        throw new Error(err);
-      }
-
-      const data = await response.json();
-      setChartData(data);
-      setStatus("✅ Data extracted successfully!");
-    } catch (err) {
-      setStatus("❌ Error: " + err.message);
-    } finally {
-      stopTimer();
-      setLoading(false);
-    }
-  };
-
-  const renderChart = () => {
-    if (!chartData) return null;
-
-    const dates = chartData.visits.map(v => v.visit_date);
-    const testNames = [...new Set(chartData.visits.flatMap(v => v.records.map(r => r.test_name)))];
-
-    const traces = testNames.map(metric => ({
-      x: dates,
-      y: chartData.visits.map(v => {
-        const record = v.records.find(r => r.test_name === metric);
-        return record ? parseFloat(record.value) : null;
-      }),
-      type: "scatter",
-      mode: "lines+markers",
-      name: metric,
-    }));
-
-    const layout = {
-      title: "Health Metrics Over Time",
-      xaxis: { title: "Date" },
-      yaxis: { title: "Value" },
-    };
-
-    return (
-      <View style={{ height: 400, width: "100%" }}>
-        <Plotly data={traces} layout={layout} />
-      </View>
-    );
-  };
-
+function HomeStack() {
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <Text style={styles.title}>HealthGraph 🩺</Text>
-      <Text style={styles.subtitle}>Upload your medical lab report PDF</Text>
-
-      <Button title="Select and Process PDF" onPress={uploadPDF} />
-
-      {loading && <ActivityIndicator size="large" color="#007bff" style={{ marginTop: 10 }} />}
-      {status && <Text style={styles.status}>{status}</Text>}
-
-      {elapsed > 0 && loading && <Text>Elapsed Time: {elapsed}s</Text>}
-
-      {chartData && renderChart()}
-    </ScrollView>
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="Dashboard" component={HomeScreen} />
+      <Stack.Screen name="AddPet" component={AddPetScreen} />
+      <Stack.Screen name="PetProfile" component={PetProfile} />
+      <Stack.Screen name="graph" component={graph} />
+    </Stack.Navigator>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flexGrow: 1,
-    alignItems: "center",
-    justifyContent: "flex-start",
-    padding: 20,
-    backgroundColor: "#fff",
-  },
-  title: {
-    fontSize: 26,
-    fontWeight: "bold",
-    color: "#333",
-    marginBottom: 10,
-  },
-  subtitle: {
-    fontSize: 16,
-    marginBottom: 20,
-  },
-  status: {
-    marginTop: 15,
-    textAlign: "center",
-  },
-});
+function MainTabs() {
+  const { logout } = useAuth();
+
+  return (
+    <Tab.Navigator
+      screenOptions={({ route }) => ({
+        headerShown: false,
+        tabBarActiveTintColor: "#B9BF1D",
+        tabBarInactiveTintColor: "#fff",
+        tabBarStyle: {
+          backgroundColor: "#0B4F6C",
+          height: 80,
+          paddingBottom: 10,
+        },
+        tabBarIcon: ({ color, size }) => {
+          let iconName;
+
+          if (route.name === "Home") iconName = "home-outline";
+          else if (route.name === "AllFiles") iconName = "folder-outline";
+          else if (route.name === "Upload") iconName = "cloud-upload-outline";
+          else if (route.name === "Logout") iconName = "log-out-outline";
+
+          return <Ionicons name={iconName} size={size} color={color} />;
+        },
+      })}
+    >
+      <Tab.Screen name="Home" component={HomeStack} />
+      <Tab.Screen name="AllFiles" component={LabRecords} />
+      <Tab.Screen name="Upload" component={FileUploadScreen} />
+      <Tab.Screen
+        name="Logout"
+        component={() => <Text style={{ color: "#fff" }}>Logging out...</Text>}
+        listeners={{
+          tabPress: (e) => {
+            e.preventDefault(); // stop navigating to a screen
+            logout();
+          },
+        }}
+      />
+    </Tab.Navigator>
+  );
+}
+
+/* ---------- Auth vs App Root ---------- */
+
+function RootNavigator() {
+  const { user, loading } = useAuth();
+
+  if (loading) {
+    // Simple loading state while we check refresh token
+    return (
+      <Text style={{ marginTop: 50, textAlign: "center" }}>Loading...</Text>
+    );
+  }
+
+  return (
+    <NavigationContainer>
+      {user ? (
+        // Logged in: show tabs
+        <MainTabs />
+      ) : (
+        // Not logged in: show auth stack
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="Login" component={LoginScreen} />
+          <Stack.Screen name="Register" component={RegisterScreen} />
+        </Stack.Navigator>
+      )}
+    </NavigationContainer>
+  );
+}
+
+/* ---------- App Root ---------- */
+
+export default function App() {
+  return (
+    <AuthProvider>
+      <RootNavigator />
+    </AuthProvider>
+  );
+}
